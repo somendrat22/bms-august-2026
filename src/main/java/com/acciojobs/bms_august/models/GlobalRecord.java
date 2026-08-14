@@ -22,4 +22,14 @@ public class GlobalRecord {
     private LocalDateTime updatedAt;
     private String createdBy;
     private String updatedBy;
+    @PrePersist
+    public void prePersist() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
 }
