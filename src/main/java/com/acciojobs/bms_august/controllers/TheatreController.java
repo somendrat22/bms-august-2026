@@ -1,0 +1,51 @@
+package com.acciojobs.bms_august.controllers;
+
+import com.acciojobs.bms_august.constants.LoggerConstant;
+import com.acciojobs.bms_august.dtos.request.RegisterCompanyDto;
+import com.acciojobs.bms_august.models.Company;
+import com.acciojobs.bms_august.services.TheatreService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+/**
+ * Theatre companies
+ * event companies
+ * internal
+ * customer
+ */
+@Slf4j
+@RestController
+@RequestMapping("/api/v1/theatre")
+public class TheatreController {
+
+    private TheatreService theatreService;
+
+    @Autowired
+    public TheatreController(TheatreService theatreService){
+        this.theatreService = theatreService;
+    }
+
+    /**
+     * This method will recieve request from frontend/ui for the registration of theatre
+     * Internally inside it - It will call TheatreService to perform the task.
+     * @param registerCompanyDto
+     * @return
+     */
+    @PostMapping("/company/register")
+    public ResponseEntity registerTheatreCompany(
+            @RequestBody RegisterCompanyDto registerCompanyDto
+            ){
+        log.info(String.format(LoggerConstant.REQUEST_RECEIVED_MESSAGE, "registerTheatreCompany", registerCompanyDto.toString()));
+        // TheatreService
+        Company theatreCompany = theatreService.registerTheatreCompany(registerCompanyDto);
+        
+        return null;
+    }
+
+}

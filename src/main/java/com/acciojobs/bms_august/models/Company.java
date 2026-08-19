@@ -3,17 +3,24 @@ package com.acciojobs.bms_august.models;
 import com.acciojobs.bms_august.enums.CompanyType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-import java.util.List;
 
+
+@SuperBuilder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "companies")
 public class Company extends GlobalRecord {
+    /**
+     * sysId - PK - Not human readable
+     */
     @Column(nullable = false, unique = true)
-    private String companyCode;
+    private String companyCode; // COMP-121
 
     @Column(nullable = false)
     private String companyName;
