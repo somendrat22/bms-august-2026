@@ -1,5 +1,6 @@
 package com.acciojobs.bms_august.services;
 
+import com.acciojobs.bms_august.constants.LoggerConstant;
 import com.acciojobs.bms_august.dtos.request.RegisterCompanyDto;
 import com.acciojobs.bms_august.enums.CompanyType;
 import com.acciojobs.bms_august.models.Company;
@@ -41,18 +42,25 @@ public class CompanyService {
 
         log.info("Calling repo layer to save company record in db.");
         // saveCompanyRecord to the database -
-        company = this.saveCompany(company);
+        company = this.saveOrUpdateCompany(company);
 
         // Calling adminAccount creation flow on the basis of companyType
         log.info("Calling adminAccount creation flow on the basis of companyType : " + companyType.toString());
-
         userService.createCompanyAdminUser(company);
-        
+
+        // We should notify user regarding the creation of the admin account on the platform for the company
+        // Notify -> Mail
+        // Notify -> Whatsapp message
+        // Notify -> Text SMS 
         return company;
     }
 
-    public Company saveCompany(Company company){
-        return this.companyRepository.save(company);
+    public Company saveOrUpdateCompany(Company company){
+        log.info(String.format(LoggerConstant.BEFORE_DB_SAVE_MESSAGE, "Company", company.toString()));
+        company = this.companyRepository.save(company);
+        log.info(String.format(LoggerConstant.AFTER_DB_SAVE_MESSAGE, "Company", company.toString()));
+        return company;
+
     }
 
 
