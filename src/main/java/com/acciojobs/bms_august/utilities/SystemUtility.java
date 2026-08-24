@@ -1,6 +1,8 @@
 package com.acciojobs.bms_august.utilities;
 
 import java.security.SecureRandom;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SystemUtility {
 
@@ -28,5 +30,19 @@ public class SystemUtility {
         }
 
         return password.toString();
+    }
+
+    public static String populateValueInTemplate(
+            HashMap<String, String> context,
+            String template
+    ){
+        for (Map.Entry<String, String> entry : context.entrySet()) {
+            String placeholder = "[[${" + entry.getKey() + "}]]";
+            template = template.replace(
+                    placeholder,
+                    entry.getValue()
+            );
+        }
+        return template;
     }
 }

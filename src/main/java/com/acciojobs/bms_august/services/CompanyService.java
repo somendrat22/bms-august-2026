@@ -48,10 +48,7 @@ public class CompanyService {
         log.info("Calling adminAccount creation flow on the basis of companyType : " + companyType.toString());
         userService.createCompanyAdminUser(company);
 
-        // We should notify user regarding the creation of the admin account on the platform for the company
-        // Notify -> Mail
-        // Notify -> Whatsapp message
-        // Notify -> Text SMS 
+        // We will call notification service
         return company;
     }
 
