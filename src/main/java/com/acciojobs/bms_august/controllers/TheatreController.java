@@ -6,6 +6,7 @@ import com.acciojobs.bms_august.models.Company;
 import com.acciojobs.bms_august.services.TheatreService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,8 +45,7 @@ public class TheatreController {
         log.info(String.format(LoggerConstant.REQUEST_RECEIVED_MESSAGE, "registerTheatreCompany", registerCompanyDto.toString()));
         // TheatreService
         Company theatreCompany = theatreService.registerTheatreCompany(registerCompanyDto);
-        
-        return null;
+        return new ResponseEntity<>(theatreCompany, HttpStatus.CREATED);
     }
 
 }

@@ -93,6 +93,8 @@ public class EmailHandlerImpl implements NotificationHandler{
 
             } else if (notification.getNotificationStatus() == NotificationStatus.IN_QUEUE) {
 
+                // IN_QUEUE
+
                 log.info(
                         "Processing queued notification. NotificationId: {}, Priority: {}",
                         notification.getSysId(),
