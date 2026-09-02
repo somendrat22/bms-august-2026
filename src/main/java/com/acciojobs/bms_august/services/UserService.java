@@ -1,9 +1,8 @@
 package com.acciojobs.bms_august.services;
 
-import com.acciojobs.bms_august.models.Company;
-import com.acciojobs.bms_august.models.Employee;
-import com.acciojobs.bms_august.models.Role;
-import com.acciojobs.bms_august.models.User;
+import com.acciojobs.bms_august.dtos.request.UserLoginRequest;
+import com.acciojobs.bms_august.exceptions.BMSUnauthorizedException;
+import com.acciojobs.bms_august.models.*;
 import com.acciojobs.bms_august.repositories.EmployeeRepository;
 import com.acciojobs.bms_august.repositories.UserRepository;
 import com.acciojobs.bms_august.transformers.UserTransformer;
@@ -48,5 +47,24 @@ public class UserService {
         // Save this user in the Employee table
         employeeRepository.save(sysAdmin);
         return sysAdmin;
+    }
+
+    public User authenticateUser(UserLoginRequest userLoginRequest){
+        String email = userLoginRequest.getEmail();
+        String password = userLoginRequest.getPassword();
+        // UserRepository -
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new BMSUnauthorizedException("User email is invalid"));
+        if(!user.getPasswordHash().equals(password)){
+            throw new BMSUnauthorizedException("User password is invalid");
+        }
+        return user;
+    }
+
+
+
+
+    public void saveOrUpdate(User user) {
+        this.userRepository.save(user);
     }
 }
