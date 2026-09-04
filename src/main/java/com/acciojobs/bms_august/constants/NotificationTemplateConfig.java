@@ -120,4 +120,6 @@ public final class NotificationTemplateConfig {
 
     public static final UUID REFUND_COMPLETED_ID =
             UUID.fromString("fb1731c6-56f9-4777-8916-47a3ebd3a23b");
+
+    public static final UUID THEATRE_REGISTRATION_TEMPLATE_ID = UUID.fromString("3e0bef10-6f53-46b4-8d48-074fc7aae584");
 }

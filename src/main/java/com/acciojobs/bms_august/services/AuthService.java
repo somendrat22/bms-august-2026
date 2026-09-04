@@ -33,6 +33,19 @@ public class AuthService {
         return new LoginSuccessResponse(token);
     }
 
+    public Employee isEmployeeHavingAccess(String token, String operationName){
+        String email = this.jwtUtility.extractAllClaims(token).get("email", String.class);
+        // User service and get the user object.
+        Employee user = userService.getEmployeeByEmail(email);
+        List<Role> roles = user.getRoles();
+        for(Role role : roles){
+            if(isRoleCanPerformOperation(role, operationName)){
+                return user;
+            }
+        }
+        throw new BMSUnauthorizedException("User is not allowed to perform this operation.");
+    }
+
 
     public User isUserHavingAccess(String token, String operationName){
         // From the token we need to get the user details.
@@ -48,7 +61,7 @@ public class AuthService {
         throw new BMSUnauthorizedException("User is not allowed to perform this operation.");
     }
 
-    public boolean isRoleCanPerformOperation(Role role, String operationName){
+    private boolean isRoleCanPerformOperation(Role role, String operationName){
         List<Operation> operations = role.getOperations();
         for(Operation operation : operations){
             if(operation.getOperationName().equals(operationName)){

@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,6 +32,24 @@ public class OperationService {
             default:
                 throw new IllegalArgumentException("Illegal value received i.e. " + companyType.toString());
         }
+    }
+
+    public List<Operation> getOperationsByName(List<String> operationNames){
+        List<Operation> operations = new ArrayList<>();
+        for(String oprName : operationNames){
+            Operation operation = this.getOperationByName(oprName);
+            if (operation == null){
+                log.info("Operation with name {} does not exist", oprName);
+                continue;
+            }
+            operations.add(operation);
+        }
+        return operations;
+    }
+
+    public Operation getOperationByName(String operationName){
+        // To get the operationByName - operationRepo
+        return operationRepository.findByOperationName(operationName).orElse(null);
     }
 
 }

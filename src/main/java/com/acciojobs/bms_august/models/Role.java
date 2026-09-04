@@ -23,3 +23,6 @@ public class Role extends GlobalRecord{
     @ManyToMany
     private List<Operation> operations;
 }
+
+// PVR - PVR_HR_SPECIALIST
+// INFOSYS - INFOSYS_HR_SPECIALIST

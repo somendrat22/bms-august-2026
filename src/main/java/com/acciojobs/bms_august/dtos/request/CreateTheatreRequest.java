@@ -1,54 +1,40 @@
-package com.acciojobs.bms_august.models;
+package com.acciojobs.bms_august.dtos.request;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
-@SuperBuilder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-@Entity
-@Table(name = "theaters")
-public class Theater extends GlobalRecord{
+public class CreateTheatreRequest {
 
-    @Column(nullable = false, unique = true)
-    private String theaterCode;
-
-    @Column(nullable = false)
     private String theaterName;
 
-    @ManyToOne
-    private Company company; // Must be THEATER_COMPANY
 
     private String description;
 
-    // Contact Details
+
     private String email;
 
     private String phoneNumber;
 
     // Address
-    @Column(nullable = false)
+
     private String addressLine1;
 
     private String addressLine2;
 
-    @Column(nullable = false)
+
     private String city;
 
-    @Column(nullable = false)
+
     private String state;
 
-    @Column(nullable = false)
+
     private String country;
 
-    @Column(nullable = false)
     private String postalCode;
 
     // Location
