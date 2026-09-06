@@ -33,19 +33,15 @@ public class SystemUtility {
     }
 
     public static String populateValueInTemplate(
-            Map<String, String> context,
+            HashMap<String, String> context,
             String template
     ){
-        if (template == null || context == null) {
-            return template;
-        }
         for (Map.Entry<String, String> entry : context.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue() != null ? entry.getValue() : "";
-            template = template
-                    .replace("[[${" + key + "}]]", value)
-                    .replace("[[{" + key + "}]]", value)
-                    .replace("{{" + key + "}}", value);
+            String placeholder = "[[${" + entry.getKey() + "}]]";
+            template = template.replace(
+                    placeholder,
+                    entry.getValue()
+            );
         }
         return template;
     }
