@@ -8,6 +8,7 @@ import com.acciojobs.bms_august.enums.CompanyType;
 import com.acciojobs.bms_august.enums.NotificationChannel;
 import com.acciojobs.bms_august.enums.NotificationPriority;
 import com.acciojobs.bms_august.enums.NotificationStatus;
+import com.acciojobs.bms_august.exceptions.RecordNotFoundException;
 import com.acciojobs.bms_august.models.Company;
 import com.acciojobs.bms_august.models.Employee;
 import com.acciojobs.bms_august.models.Notification;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 
 /**
@@ -86,6 +88,11 @@ public class TheatreService {
         });
 
         return theater;
+    }
+
+
+    public Theater fetchTheatreBySysId(UUID sysId){
+        return this.theatreRepository.findById(sysId).orElseThrow(() -> new RecordNotFoundException(String.format("Theatre with sysId %s does not exist", sysId.toString())));
     }
 
 
