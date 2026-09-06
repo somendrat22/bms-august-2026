@@ -38,6 +38,7 @@ public class User extends GlobalRecord {
     @Column(nullable = false)
     private boolean active = true;
 
+
     @Column(nullable = false)
     private boolean emailVerified = false;
 

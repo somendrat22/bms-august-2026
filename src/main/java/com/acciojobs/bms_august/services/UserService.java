@@ -145,6 +145,11 @@ public class UserService {
         return invitee;
     }
 
+    // TODO - Update this method to fetch user by field isEmailSubscribed - For Temp basis we are fetching all the users.
+    public List<User> getEmailSubscribedUser(){
+        return userRepository.findAll();
+    }
+
 
 
     public void saveOrUpdate(User user) {

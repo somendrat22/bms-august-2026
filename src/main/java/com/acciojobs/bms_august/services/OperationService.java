@@ -24,7 +24,7 @@ public class OperationService {
     public List<Operation> getOperationsForAdminByCompanyType(CompanyType companyType){
         switch (companyType){
             case INTERNAL:
-                return operationRepository.fetchAllOperationByCategory("INTERNAL_COMPANY");
+                return operationRepository.findAll();
             case THEATER_COMPANY:
                 return operationRepository.fetchAllOperationByCategory("THEATRE_COMPANY");
             case EVENT_COMPANY:

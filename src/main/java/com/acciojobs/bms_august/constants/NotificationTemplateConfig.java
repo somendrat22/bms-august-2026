@@ -123,6 +123,6 @@ public final class NotificationTemplateConfig {
 
     public static final UUID THEATRE_REGISTRATION_TEMPLATE_ID = UUID.fromString("3e0bef10-6f53-46b4-8d48-074fc7aae584");
     public static final UUID HALL_REGISTRATION_TEMPLATE_ID = UUID.fromString("549fe59b-3e7b-4bca-ab82-a14a5529d92d");
-
+    public static final UUID MOVIE_LAUNCHED_TEMPLATE_ID = UUID.fromString("40e88b1b-4cb2-4aaa-93a3-7b7a85841a72");
 
 }
